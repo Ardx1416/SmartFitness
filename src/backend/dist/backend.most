@@ -1,0 +1,73 @@
+// Version: 1.0.0
+type AresFitnessProfile__615193864 =
+  {
+    currentWeekCompletedDays : [Text];
+    dietType : ?Text;
+    experienceLevel : ?Text;
+    goal : ?Text;
+    heightCm : ?Float;
+    lastWorkoutDate : ?Text;
+    missedDaysCount : Nat;
+    onboardingComplete : Bool;
+    personalityMode : Text;
+    weightKg : ?Float
+  };
+type CallerProfile__826575889 = {email : Text; name : Text};
+type ChatMessage__1037536196 =
+  {id : Text; message : Text; mode : Text; sender : Text; timestamp : Int};
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type PasswordHash__260336738 = Text;
+type StoredUser__776224913 =
+  {
+    email : Text;
+    id : ?UserId__313180070;
+    passwordHash : PasswordHash__260336738;
+    username : Text
+  };
+type UserId__313180070 = Nat;
+type UserRole__599675725 = {#admin; #guest; #user};
+actor {
+  stable aresChatHistories :
+    {
+      var root :
+        Node__46230540<Principal, List__415060402<ChatMessage__1037536196>>;
+      var size : Nat__490723111
+    };
+  stable aresFitnessProfiles :
+    {
+      var root : Node__46230540<Principal, AresFitnessProfile__615193864>;
+      var size : Nat__490723111
+    };
+  stable callerProfiles :
+    {
+      var root : Node__46230540<Principal, CallerProfile__826575889>;
+      var size : Nat__490723111
+    };
+  stable var firstAdminSet : Bool;
+  stable var nextUserId : Nat;
+  stable roles :
+    {
+      var root : Node__46230540<Principal, UserRole__599675725>;
+      var size : Nat__490723111
+    };
+  stable users :
+    {
+      var root : Node__46230540<Text, StoredUser__776224913>;
+      var size : Nat__490723111
+    }
+};

@@ -1,0 +1,77 @@
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserProfile = 
+ record {
+   email: text;
+   id: opt UserId;
+   username: text;
+ };
+type UserId = nat;
+type UpdateUserProfile = 
+ record {
+   email: text;
+   passwordHash: text;
+   username: text;
+ };
+type Results = 
+ variant {
+   err: text;
+   ok;
+ };
+type CreateUserProfile = 
+ record {
+   email: text;
+   password: text;
+   username: text;
+ };
+type ChatMessage = 
+ record {
+   id: text;
+   message: text;
+   mode: text;
+   sender: text;
+   timestamp: int;
+ };
+type CallerProfile = 
+ record {
+   email: text;
+   name: text;
+ };
+type AresFitnessProfile = 
+ record {
+   currentWeekCompletedDays: vec text;
+   dietType: opt text;
+   experienceLevel: opt text;
+   goal: opt text;
+   heightCm: opt float64;
+   lastWorkoutDate: opt text;
+   missedDaysCount: nat;
+   onboardingComplete: bool;
+   personalityMode: text;
+   weightKg: opt float64;
+ };
+service : {
+  addAresChatMessage: (msg: ChatMessage) -> ();
+  assignRole: (user: principal, role: UserRole) -> ();
+  clearAresChatHistory: () -> ();
+  deleteUser: (id: UserId) -> (Results);
+  getAresChatHistory: () -> (vec ChatMessage) query;
+  getAresFitnessProfile: () -> (opt AresFitnessProfile) query;
+  getCallerUserProfile: () -> (opt CallerProfile) query;
+  getMyRole: () -> (UserRole) query;
+  getUserByEmail: (email: text) -> (opt UserProfile) query;
+  getUserById: (id: UserId) -> (opt UserProfile) query;
+  getUserProfile: (user: principal) -> (opt CallerProfile) query;
+  getUsers: () -> (vec UserProfile) query;
+  logWorkoutCompleted: (date: text) -> ();
+  logWorkoutSkipped: () -> ();
+  login: (email: text, password: text) -> (Results);
+  register: (createUserProfile: CreateUserProfile) -> (Results);
+  saveAresFitnessProfile: (profile: AresFitnessProfile) -> ();
+  saveCallerUserProfile: (profile: CallerProfile) -> ();
+  updateUser: (id: UserId, profile: UpdateUserProfile) -> (Results);
+}

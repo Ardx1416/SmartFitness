@@ -1,0 +1,23 @@
+{
+  "overview": "Smart Fitness is a premium AI-powered gym coach web app with workout planning, exercise library, BMI calculator, and curated diet plans — all in a sleek dark athletic design.",
+  "features": [
+    "BMI Calculator with metric/imperial toggle and color-coded categories",
+    "Curated diet plans for Weight Loss, Muscle Gain, Endurance, and Clean Eating",
+    "200+ exercise library with YouTube video demos",
+    "Custom workout builder and live session tracker",
+    "Workout history and progress charts",
+    "Share modal with QR code"
+  ],
+  "category": "health-fitness",
+  "tags": [
+    "fitness",
+    "bmi",
+    "diet",
+    "workout",
+    "exercise",
+    "health",
+    "gym",
+    "nutrition"
+  ],
+  "last_updated": "2026-04-18T18:10:21.587Z"
+}
